@@ -1,0 +1,13 @@
+.header {
+    min-height: 600px;
+}
+
+.text {
+    margin: 40px 0px 0px 30px;
+}
+
+.img {
+    margin-top: 8px;
+    max-width: 90px;
+    max-height: 90px;
+}
