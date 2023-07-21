@@ -17,8 +17,6 @@ function App() {
     dispatch(setWords());
   }, [dispatch]);
 
-console.log(wordsForLearning, 'words in app')
-
   return (
     <div className={s.body}>
       <Header />

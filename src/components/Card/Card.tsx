@@ -51,8 +51,6 @@ const WordCard = (props: PropsType) => {
 
 const EducationCard = (props: PropsType) => {
 
-console.log(props.words, 'Words in main')
-
   return (
     <div className={s.card}>
       <Box sx={{ maxWidth: 300 }}>
