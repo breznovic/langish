@@ -1,10 +1,10 @@
-import EducationCard from "./components/Card/Card";
 import s from "./App.module.css";
 import Header from "./components/Header/Header";
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "./store/store";
 import { useEffect } from "react";
 import { setWords } from "./store/features/englishSlice";
+import Card from "./components/Card/Card";
 
 function App() {
   const wordsForLearning = useSelector(
@@ -20,7 +20,7 @@ function App() {
   return (
     <div className={s.body}>
       <Header />
-      <EducationCard words={wordsForLearning} />
+      <Card definition="This is" word="About" id="test"/>
     </div>
   );
 }

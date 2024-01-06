@@ -15,5 +15,3 @@ export let englishWordsC1: WordType[] = [
     definition: "deviation from the normal",
   },
 ];
-
-
