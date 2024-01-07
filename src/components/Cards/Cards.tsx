@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import Card from "./Card/Card";
 import { RootState } from "../../store/store";
 import s from "./Cards.module.css";
+import Header from "../Header/Header";
 
 const Cards = () => {
   const wordsForLearning = useSelector(
@@ -16,7 +17,12 @@ const Cards = () => {
     );
   });
 
-  return <div className={s.container}>{words}</div>;
+  return (
+    <div>
+      <Header />
+      <div className={s.container}>{words}</div>;
+    </div>
+  );
 };
 
 export default Cards;

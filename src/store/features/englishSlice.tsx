@@ -6,8 +6,6 @@ const initialState: {
   wordsForLearning: WordType[];
 } = { englishWordsC1: englishWordsC1, wordsForLearning: [] };
 
-console.log(englishWordsC1);
-
 export const englishSlice = createSlice({
   name: "english",
   initialState,
