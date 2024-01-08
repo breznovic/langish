@@ -1,16 +1,14 @@
 import s from "./Button.module.css";
 
 type PropsType = {
-  onClick: () => void;
-  children: React.ReactNode;
+  title: string;
+  className?: string;
 };
 
-const Button = ({ onClick, children }: PropsType) => {
-  return (
-    <button className={s.button} onClick={onClick}>
-      {children}
-    </button>
-  );
+const Button = (props: PropsType) => {
+  const buttonClassName = `${s.button} ${props.className || ""}`;
+
+  return <button className={buttonClassName}>{props.title}</button>;
 };
 
 export default Button;

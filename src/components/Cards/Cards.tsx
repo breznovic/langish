@@ -9,18 +9,22 @@ const Cards = () => {
     (state: RootState) => state.english.englishWordsC1
   );
 
-  let words = wordsForLearning.map((w) => {
-    return (
-      <div key={w.id} className={s.cardWrapper}>
-        <Card id={w.id} definition={w.definition} word={w.word} />
-      </div>
-    );
-  });
+  const shuffledWords = wordsForLearning
+    .slice()
+    .sort(() => Math.random() - 0.5);
+
+  const selectedWords = shuffledWords.slice(0, 8);
+
+  const cards = selectedWords.map((w) => (
+    <div key={w.id} className={s.cardWrapper}>
+      <Card id={w.id} definition={w.definition} word={w.word} />
+    </div>
+  ));
 
   return (
     <div>
       <Header />
-      <div className={s.container}>{words}</div>;
+      <div className={s.container}>{cards}</div>
     </div>
   );
 };

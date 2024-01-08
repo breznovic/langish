@@ -16,6 +16,32 @@
 .definition {
   font-size: 16px;
   color: #555;
+  width: 160px;
+  height: 75px;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  justify-content: space-around;
+  margin-top: 100px;
+}
+
+.buttonGroup div {
+  margin: 0px 5px 0px 5px;
+}
+
+.knowButton {
+  background-color: #008040;
+}
+
+.knowButton:hover {
+  background-color: #09351fe3;
+}
+
+.knowButton:active {
+  background-color: #00561a;
 }
 
 @media only screen and (max-width: 600px) {
