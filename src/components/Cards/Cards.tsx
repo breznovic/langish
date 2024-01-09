@@ -3,7 +3,8 @@ import { Card } from "./Card/Card";
 import { RootState } from "../../store/store";
 import s from "./Cards.module.css";
 import Header from "../Header/Header";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
+import { WordType } from "../../store/englishWords";
 
 const Cards = () => {
   const wordsForLearning = useSelector(
@@ -16,8 +17,8 @@ const Cards = () => {
     .slice()
     .sort(() => Math.random() - 0.5);
 
-  const selectedWords = useMemo(
-    () => shuffledWords.slice(0, 8),
+  const selectedWords: WordType[] = useMemo(
+    () => shuffledWords.slice(0, 1),
     [shuffledWords]
   );
 
@@ -25,24 +26,20 @@ const Cards = () => {
     setCardsBackSide(!cardsBackSide);
   };
 
-  let cardsWithDefinition = selectedWords.map((w) => (
-    <div key={w.id} className={s.cardWrapper}>
-      <Card
-        id={w.id}
-        word={w.word}
-        definition={w.definition}
-        reverseCard={() => reverseCard(w.id)}
-        isFlipped={!cardsBackSide}
-      />
-    </div>
-  ));
+  const initialWordRef = useRef(selectedWords[0]?.word);
 
-  let learningCards = selectedWords.map((w) => (
+  const initialDefinitionRef = useRef<string>(selectedWords[0]?.definition);
+
+  let cards = selectedWords.map((w) => (
     <div key={w.id} className={s.cardWrapper}>
       <Card
         id={w.id}
-        word={w.word}
-        definition="Click to see definition"
+        word={initialWordRef.current}
+        definition={
+          cardsBackSide
+            ? "Click to see definition"
+            : initialDefinitionRef.current
+        }
         reverseCard={() => reverseCard(w.id)}
         isFlipped={!cardsBackSide}
       />
@@ -52,9 +49,7 @@ const Cards = () => {
   return (
     <div>
       <Header />
-      <div className={s.container}>
-        {cardsBackSide ? learningCards : cardsWithDefinition}
-      </div>
+      <div className={s.container}>{cards}</div>
     </div>
   );
 };
