@@ -2,9 +2,16 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  margin-left: 300px;
 }
 
 .cardWrapper {
   margin: 10px;
 }
 
+.deckContaner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-left: 15px;
+}

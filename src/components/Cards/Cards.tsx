@@ -5,6 +5,7 @@ import s from "./Cards.module.css";
 import Header from "../Header/Header";
 import { useMemo, useRef, useState } from "react";
 import { WordType } from "../../store/englishWords";
+import { Deck } from "./Deck/Deck";
 
 const Cards = () => {
   const wordsForLearning = useSelector(
@@ -48,7 +49,10 @@ const Cards = () => {
   return (
     <div>
       <Header />
-      <div className={s.container}>{cards}</div>
+      <div className={s.deckContaner}>
+        <Deck />
+      </div>
+       <div className={s.container}>{cards}</div>
     </div>
   );
 };
