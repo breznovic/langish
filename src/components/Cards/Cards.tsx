@@ -22,7 +22,7 @@ const Cards = () => {
     [shuffledWords]
   );
 
-  const reverseCard = (id: string) => {
+  const reverseCard = () => {
     setCardsBackSide(!cardsBackSide);
   };
 
@@ -40,8 +40,7 @@ const Cards = () => {
             ? "Click to see definition"
             : initialDefinitionRef.current
         }
-        reverseCard={() => reverseCard(w.id)}
-        isFlipped={!cardsBackSide}
+        reverseCard={() => reverseCard()}
       />
     </div>
   ));
