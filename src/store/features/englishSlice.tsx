@@ -11,11 +11,8 @@ export const setWordsForLearning = createAsyncThunk(
   "english/setWordsForLearning",
   async () => {
     const res = await Promise.resolve(englishWordsC1);
-    let selectedWord = res
-      .slice()
-      .sort(() => Math.random() - 0.5)
-      .slice(0, 1);
-    return selectedWord;
+    const randomIndex = Math.floor(Math.random() * res.length);
+    return res[randomIndex];
   }
 );
 
@@ -26,8 +23,8 @@ export const englishSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(
       setWordsForLearning.fulfilled,
-      (state, action: PayloadAction<WordType[]>) => {
-        state.wordsForLearning.push(...action.payload);
+      (state, action: PayloadAction<WordType>) => {
+        state.wordsForLearning.push(action.payload);
       }
     );
   },

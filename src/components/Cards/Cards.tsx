@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
-import { Card } from "./Card/Card";
 import { RootState, useAppDispatch } from "../../store/store";
 import s from "./Cards.module.css";
 import Header from "../Header/Header";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Deck } from "./Deck/Deck";
 import { setWordsForLearning } from "../../store/features/englishSlice";
+import { Card } from "./Card/Card";
 
 const Cards = () => {
   const wordsForLearning = useSelector(
@@ -24,31 +24,22 @@ const Cards = () => {
     setCardsBackSide(!cardsBackSide);
   };
 
-  const initialWordRef = useRef(wordsForLearning[0]?.word);
-
-  const initialDefinitionRef = useRef<string>(wordsForLearning[0]?.definition);
-
-  let cards = wordsForLearning.map((w) => (
-    <div key={w.id} className={s.cardWrapper}>
-      <Card
-        id={w.id}
-        word={initialWordRef.current}
-        definition={
-          cardsBackSide
-            ? "Click to see definition"
-            : initialDefinitionRef.current
-        }
-        reverseCard={() => reverseCard()}
-      />
-    </div>
-  ));
-
   return (
     <div>
       <Header />
       <div className={s.container}>
         <Deck />
-        {cards}
+        {wordsForLearning.length > 0 && (
+          <Card
+            word={wordsForLearning[0]?.word}
+            definition={
+              cardsBackSide
+                ? "Click to see definition"
+                : wordsForLearning[0]?.definition
+            }
+            reverseCard={reverseCard}
+          />
+        )}
       </div>
     </div>
   );
