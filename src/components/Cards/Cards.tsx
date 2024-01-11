@@ -1,37 +1,34 @@
 import { useSelector } from "react-redux";
 import { Card } from "./Card/Card";
-import { RootState } from "../../store/store";
+import { RootState, useAppDispatch } from "../../store/store";
 import s from "./Cards.module.css";
 import Header from "../Header/Header";
-import { useMemo, useRef, useState } from "react";
-import { WordType } from "../../store/englishWords";
+import { useEffect, useRef, useState } from "react";
 import { Deck } from "./Deck/Deck";
+import { setWordsForLearning } from "../../store/features/englishSlice";
 
 const Cards = () => {
   const wordsForLearning = useSelector(
-    (state: RootState) => state.english.englishWordsC1
+    (state: RootState) => state.english.wordsForLearning
   );
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setWordsForLearning());
+  }, [dispatch]);
 
   const [cardsBackSide, setCardsBackSide] = useState(true);
-
-  const shuffledWords = wordsForLearning
-    .slice()
-    .sort(() => Math.random() - 0.5);
-
-  const selectedWords: WordType[] = useMemo(
-    () => shuffledWords.slice(0, 1),
-    [shuffledWords]
-  );
 
   const reverseCard = () => {
     setCardsBackSide(!cardsBackSide);
   };
 
-  const initialWordRef = useRef(selectedWords[0]?.word);
+  const initialWordRef = useRef(wordsForLearning[0]?.word);
 
-  const initialDefinitionRef = useRef<string>(selectedWords[0]?.definition);
+  const initialDefinitionRef = useRef<string>(wordsForLearning[0]?.definition);
 
-  let cards = selectedWords.map((w) => (
+  let cards = wordsForLearning.map((w) => (
     <div key={w.id} className={s.cardWrapper}>
       <Card
         id={w.id}
@@ -49,10 +46,10 @@ const Cards = () => {
   return (
     <div>
       <Header />
-      <div className={s.deckContaner}>
+      <div className={s.container}>
         <Deck />
+        {cards}
       </div>
-       <div className={s.container}>{cards}</div>
     </div>
   );
 };
