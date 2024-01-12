@@ -3,6 +3,7 @@ import s from "./Button.module.css";
 type PropsType = {
   title: string;
   className?: string;
+  onClick: () => void;
 };
 
 const Button = (props: PropsType) => {

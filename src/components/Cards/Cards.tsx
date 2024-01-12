@@ -29,7 +29,7 @@ const Cards = () => {
       <Header />
       <div className={s.container}>
         <Deck />
-        {wordsForLearning.length > 0 && (
+        <div className={s.cardWrapper}>
           <Card
             word={wordsForLearning[0]?.word}
             definition={
@@ -39,7 +39,7 @@ const Cards = () => {
             }
             reverseCard={reverseCard}
           />
-        )}
+        </div>
       </div>
     </div>
   );

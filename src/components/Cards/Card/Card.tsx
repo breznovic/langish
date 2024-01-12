@@ -16,10 +16,10 @@ export const Card = (props: PropsType) => {
       </p>
       <div className={s.buttonGroup}>
         <div>
-          <Button title="I know" className={s.knowButton} />
+          <Button title="I know" className={s.knowButton} onClick={() => {}} />
         </div>
         <div>
-          <Button title="To learn" />
+          <Button title="To learn" onClick={() => {}} />
         </div>
       </div>
     </div>
