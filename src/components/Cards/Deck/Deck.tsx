@@ -1,15 +1,11 @@
 import Button from "../../common/Button/Button";
 import s from "./Deck.module.css";
 import logo from "../../../assets/icon.png";
-import { useAppDispatch } from "../../../store/store";
-import { addWord } from "../../../store/features/englishSlice";
 
 export const Deck = () => {
-  const dispatch = useAppDispatch();
-
-  const addWordOnClick = async () => {
-    dispatch(addWord());
-  };
+  /*  const addWordOnClick = () => {
+   setWordsForLearning()
+  };  */
 
   return (
     <div className={s.card}>
@@ -19,7 +15,7 @@ export const Deck = () => {
         <Button
           title="Add word to learn"
           className={s.button}
-          onClick={addWordOnClick}
+          onClick={() => {}} // BUTTON WITHOUT LOGIC
         />
       </div>
     </div>

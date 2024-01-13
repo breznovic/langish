@@ -4,11 +4,12 @@ import s from "./Cards.module.css";
 import Header from "../Header/Header";
 import { useEffect, useState } from "react";
 import { Deck } from "./Deck/Deck";
-import { setWordsForLearning } from "../../store/features/englishSlice";
 import { Card } from "./Card/Card";
+import { setWordsForLearning } from "../../store/features/englishSlice";
+import { WordType } from "../../store/englishWords";
 
 const Cards = () => {
-  const wordsForLearning = useSelector(
+  let wordsForLearning = useSelector(
     (state: RootState) => state.english.wordsForLearning
   );
 
@@ -16,7 +17,7 @@ const Cards = () => {
 
   useEffect(() => {
     dispatch(setWordsForLearning());
-  }, [dispatch]);
+  }, []);
 
   const [cardsBackSide, setCardsBackSide] = useState(true);
 
@@ -24,22 +25,32 @@ const Cards = () => {
     setCardsBackSide(!cardsBackSide);
   };
 
+  let getWordsAray = (words: WordType[], index: number) => {
+    const initialWord = words.slice(0, index);
+    const addWordToArray = words.slice(index + 1);
+    return initialWord;
+  };
+
+  let words = getWordsAray(wordsForLearning, 1);
+
   return (
     <div>
       <Header />
       <div className={s.container}>
-        <Deck />
         <div className={s.cardWrapper}>
-          <Card
-            word={wordsForLearning[0]?.word}
-            definition={
-              cardsBackSide
-                ? "Click to see definition"
-                : wordsForLearning[0]?.definition
-            }
-            reverseCard={reverseCard}
-          />
+          <Deck />
         </div>
+        {words.map((w) => (
+          <div className={s.cardWrapper} key={w.id}>
+            <Card
+              word={w.word}
+              definition={
+                cardsBackSide ? "Click to see definition" : w.definition
+              }
+              reverseCard={reverseCard}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -10,31 +10,25 @@ const initialState: {
 export const setWordsForLearning = createAsyncThunk(
   "english/setWordsForLearning",
   async () => {
-    const res = await Promise.resolve(englishWordsC1);
-    const shuffledWord = res[Math.floor(Math.random() * res.length)];
-    return shuffledWord;
+    const shuffledWords = [...englishWordsC1].sort(() => Math.random() - 0.5);
+    const selectedWords = shuffledWords.slice(0, 7);
+    return selectedWords;
   }
 );
 
 export const englishSlice = createSlice({
   name: "english",
   initialState,
-  reducers: {
-    addWord: (state, action: PayloadAction<WordType>) => {
-      state.myWords.push(action.payload);
-    },
-  },
+  reducers: {},
 
   extraReducers: (builder) => {
     builder.addCase(
       setWordsForLearning.fulfilled,
-      (state, action: PayloadAction<WordType>) => {
-        state.wordsForLearning.push(action.payload);
+      (state, action: PayloadAction<WordType[]>) => {
+        state.wordsForLearning.push(...action.payload);
       }
     );
   },
 });
-
-export const { addWord } = englishSlice.actions;
 
 export default englishSlice.reducer;
