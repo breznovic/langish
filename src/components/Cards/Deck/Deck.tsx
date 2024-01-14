@@ -3,6 +3,8 @@ import s from "./Deck.module.css";
 import logo from "../../../assets/icon.png";
 import { useAppDispatch } from "../../../store/store";
 import { setWordForLearning } from "../../../store/features/englishSlice";
+import { useState } from "react";
+import Modal from "../../common/Modal/Modal";
 
 export const Deck = () => {
   const dispatch = useAppDispatch();
@@ -11,7 +13,16 @@ export const Deck = () => {
     dispatch(setWordForLearning());
   };
 
-  console.log(addNewWord, "add");
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
 
   return (
     <div className={s.card}>
@@ -25,6 +36,10 @@ export const Deck = () => {
           onClick={addNewWord}
         />
       </div>
+      <div>
+      <button onClick={handleOpenModal}>Open Modal</button>
+      {showModal && <Modal onClose={handleCloseModal} />}
+    </div>
     </div>
   );
 };

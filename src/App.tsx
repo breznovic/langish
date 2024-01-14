@@ -6,7 +6,7 @@ function App() {
   return (
     <div className={s.body}>
       <Header />
-      <Main/>
+      <Main />
     </div>
   );
 }

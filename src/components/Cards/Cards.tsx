@@ -18,9 +18,6 @@ const Cards = () => {
     setCardsBackSide(!cardsBackSide);
   };
 
-console.log(wordForLearning, 'fw');
-
-
   return (
     <div>
       <Header />
