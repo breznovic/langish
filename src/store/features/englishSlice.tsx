@@ -7,12 +7,12 @@ const initialState: {
   wordsForLearning: WordType[];
 } = { englishWordsC1: englishWordsC1, myWords: [], wordsForLearning: [] };
 
-export const setWordsForLearning = createAsyncThunk(
+export const setWordForLearning = createAsyncThunk(
   "english/setWordsForLearning",
   async () => {
-    const shuffledWords = [...englishWordsC1].sort(() => Math.random() - 0.5);
-    const selectedWords = shuffledWords.slice(0, 7);
-    return selectedWords;
+    const randomWord =
+      englishWordsC1[Math.floor(Math.random() * englishWordsC1.length)];
+    return randomWord;
   }
 );
 
@@ -23,9 +23,9 @@ export const englishSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(
-      setWordsForLearning.fulfilled,
-      (state, action: PayloadAction<WordType[]>) => {
-        state.wordsForLearning.push(...action.payload);
+      setWordForLearning.fulfilled,
+      (state, action: PayloadAction<WordType>) => {
+        state.wordsForLearning.push(action.payload);
       }
     );
   },
