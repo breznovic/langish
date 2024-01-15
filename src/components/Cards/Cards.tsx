@@ -3,16 +3,20 @@ import { RootState } from "../../store/store";
 import s from "./Cards.module.css";
 import Header from "../Header/Header";
 import { useState } from "react";
-import { Deck } from "./Deck/Deck";
 import { Card } from "./Card/Card";
+import Deck from "./Deck/Deck";
+import Button from "../common/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 const Cards = () => {
   let wordForLearning = useSelector(
     (state: RootState) => state.english.wordsForLearning
   );
 
+  const navigate = useNavigate();
+  const toLearning = () => navigate("/learning");
+
   const [cardsBackSide, setCardsBackSide] = useState(true);
-  const [index, setIndex] = useState(0);
 
   const reverseCard = () => {
     setCardsBackSide(!cardsBackSide);
@@ -39,6 +43,11 @@ const Cards = () => {
             ))
           : ""}
       </div>
+      <Button
+        title="Go to learning"
+        onClick={toLearning}
+        className={s.button}
+      />
     </div>
   );
 };

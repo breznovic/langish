@@ -8,3 +8,46 @@
 .cardWrapper {
   margin-left: 10px;
 }
+
+.button {
+  background-color: #ffa500;
+  padding: 30px 40px;
+}
+
+.button:hover {
+  background-color: #ffc04d;
+}
+
+.button:active {
+  background-color: #e68900;
+}
+
+@media only screen and (max-width: 600px) {
+  .button {
+    margin: 20px 0px 0px 155px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .button {
+    margin: 20px 0px 0px 260px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .button {
+    margin: 20px 0px 0px 400px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .button {
+    margin: 20px 0px 0px 500px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .button {
+    margin: 50px 0px 0px 850px;
+  }
+}

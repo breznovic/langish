@@ -8,7 +8,7 @@ const initialState: {
 } = { englishWordsC1: englishWordsC1, myWords: [], wordsForLearning: [] };
 
 export const setWordForLearning = createAsyncThunk(
-  "english/setWordsForLearning",
+  "english/setWordForLearning",
   async () => {
     const randomWord =
       englishWordsC1[Math.floor(Math.random() * englishWordsC1.length)];
