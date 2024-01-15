@@ -13,10 +13,16 @@ const Cards = () => {
     (state: RootState) => state.english.wordsForLearning
   );
 
+  let myWords = useSelector((state: RootState) => state.english.myWords);
+
   const navigate = useNavigate();
-  const toLearning = () => navigate("/learning");
+  const toLearning = () => {
+    setRenderChangedCode(true);
+    navigate("/learning");
+  };
 
   const [cardsBackSide, setCardsBackSide] = useState(true);
+  const [renderChangedCode, setRenderChangedCode] = useState(false);
 
   const reverseCard = () => {
     setCardsBackSide(!cardsBackSide);
@@ -26,28 +32,52 @@ const Cards = () => {
     <div>
       <Header />
       <div className={s.container}>
-        <div className={s.cardWrapper}>
-          <Deck />
-        </div>
-        {wordForLearning.length > 0
-          ? wordForLearning.map((w) => (
-              <div className={s.cardWrapper} key={w.id}>
-                <Card
-                  word={w.word}
-                  definition={
-                    cardsBackSide ? "Click to see definition" : w.definition
-                  }
-                  reverseCard={reverseCard}
-                />
-              </div>
-            ))
-          : ""}
+        {renderChangedCode ? (
+          <>
+            {myWords.length > 0
+              ? myWords.map((w) => (
+                  <div className={s.cardWrapper} key={w.id}>
+                    <Card
+                      word={w.word}
+                      definition={cardsBackSide ? "Click " : w.definition}
+                      reverseCard={reverseCard}
+                      id={w.id}
+                    />
+                  </div>
+                ))
+              : ""}
+          </>
+        ) : (
+          <>
+            <div className={s.cardWrapper}>
+              <Deck />
+            </div>
+            {wordForLearning.length > 0
+              ? wordForLearning.map((w) => (
+                  <div className={s.cardWrapper} key={w.id}>
+                    <Card
+                      word={w.word}
+                      definition={
+                        cardsBackSide ? "Click to see definition" : w.definition
+                      }
+                      reverseCard={reverseCard}
+                      id={w.id}
+                    />
+                  </div>
+                ))
+              : ""}
+          </>
+        )}
       </div>
-      <Button
-        title="Go to learning"
-        onClick={toLearning}
-        className={s.button}
-      />
+      {wordForLearning.length > 0 ? (
+        <Button
+          title="Go to learning"
+          onClick={toLearning}
+          className={s.button}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

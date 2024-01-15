@@ -19,8 +19,15 @@ export const setWordForLearning = createAsyncThunk(
 export const englishSlice = createSlice({
   name: "english",
   initialState,
-  reducers: {},
-
+  reducers: {
+    addWordForLearning: (state) => {
+      let wordsForLearning = state.wordsForLearning;
+      let wordForLearning = wordsForLearning.find((w) => w.word === w.word);
+      if (wordForLearning && wordForLearning.id !== wordForLearning.id) {
+        state.myWords.push(wordForLearning);
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       setWordForLearning.fulfilled,
@@ -30,5 +37,7 @@ export const englishSlice = createSlice({
     );
   },
 });
+
+export const { addWordForLearning } = englishSlice.actions;
 
 export default englishSlice.reducer;
