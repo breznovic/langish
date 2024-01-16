@@ -25,12 +25,7 @@ const Cards = () => {
   const location = useLocation();
   const isLearningPage = location.pathname === "/learning";
 
-  const [cardsBackSide, setCardsBackSide] = useState(true);
   const [renderChangedCode, setRenderChangedCode] = useState(false);
-
-  const reverseCard = (id: string) => {
-    setCardsBackSide(!cardsBackSide);
-  };
 
   const button = (
     <Button
@@ -49,14 +44,7 @@ const Cards = () => {
             {myWords.length > 0
               ? myWords.map((w) => (
                   <div className={s.cardWrapper} key={w.id}>
-                    <Card
-                      word={w.word}
-                      definition={
-                        cardsBackSide ? "Click to see definition" : w.definition
-                      }
-                      reverseCard={reverseCard}
-                      id={w.id}
-                    />
+                    <Card word={w.word} definition={w.definition} id={w.id} />
                   </div>
                 ))
               : ""}
@@ -69,14 +57,7 @@ const Cards = () => {
             {wordForLearning.length > 0
               ? wordForLearning.map((w) => (
                   <div className={s.cardWrapper} key={w.id}>
-                    <Card
-                      word={w.word}
-                      definition={
-                        cardsBackSide ? "Click to see definition" : w.definition
-                      }
-                      reverseCard={reverseCard}
-                      id={w.id}
-                    />
+                    <Card word={w.word} definition={w.definition} id={w.id} />
                   </div>
                 ))
               : ""}

@@ -28,6 +28,25 @@ export const englishSlice = createSlice({
       if (isWordUnique) {
         state.myWords.push(wordToAdd);
       }
+      const arrayWithDeletedWord = state.wordsForLearning.filter(
+        (word) => word.id !== wordToAdd.id
+      );
+      state.wordsForLearning = arrayWithDeletedWord;
+    },
+    deleteWord: (state, action: PayloadAction<string>) => {
+      const wordIdToDelete = action.payload;
+
+      state.englishWordsC1 = state.englishWordsC1.filter(
+        (word) => word.id !== wordIdToDelete
+      );
+
+      state.myWords = state.myWords.filter(
+        (word) => word.id !== wordIdToDelete
+      );
+
+      state.wordsForLearning = state.wordsForLearning.filter(
+        (word) => word.id !== wordIdToDelete
+      );
     },
   },
   extraReducers: (builder) => {
@@ -46,6 +65,6 @@ export const englishSlice = createSlice({
   },
 });
 
-export const { addWordForLearning } = englishSlice.actions;
+export const { addWordForLearning, deleteWord } = englishSlice.actions;
 
 export default englishSlice.reducer;

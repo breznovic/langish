@@ -1,0 +1,7 @@
+if (myWords.length < 1) {navigate("/cards")} 
+
+englishWordsC1: WordType[]; // deleting words 
+
+englishWordsC1: WordType[]; // Set reset after deleting words 
+
+
