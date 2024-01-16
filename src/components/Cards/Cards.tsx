@@ -6,7 +6,7 @@ import { useState } from "react";
 import { Card } from "./Card/Card";
 import Deck from "./Deck/Deck";
 import Button from "../common/Button/Button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Cards = () => {
   let wordForLearning = useSelector(
@@ -16,17 +16,29 @@ const Cards = () => {
   let myWords = useSelector((state: RootState) => state.english.myWords);
 
   const navigate = useNavigate();
+
   const toLearning = () => {
     setRenderChangedCode(true);
     navigate("/learning");
   };
 
+  const location = useLocation();
+  const isLearningPage = location.pathname === "/learning";
+
   const [cardsBackSide, setCardsBackSide] = useState(true);
   const [renderChangedCode, setRenderChangedCode] = useState(false);
 
-  const reverseCard = () => {
+  const reverseCard = (id: string) => {
     setCardsBackSide(!cardsBackSide);
   };
+
+  const button = (
+    <Button
+      title="Go to learning"
+      onClick={toLearning}
+      className={isLearningPage ? `${s.button} ${s.hide}` : s.button}
+    />
+  );
 
   return (
     <div>
@@ -39,7 +51,9 @@ const Cards = () => {
                   <div className={s.cardWrapper} key={w.id}>
                     <Card
                       word={w.word}
-                      definition={cardsBackSide ? "Click " : w.definition}
+                      definition={
+                        cardsBackSide ? "Click to see definition" : w.definition
+                      }
                       reverseCard={reverseCard}
                       id={w.id}
                     />
@@ -50,7 +64,7 @@ const Cards = () => {
         ) : (
           <>
             <div className={s.cardWrapper}>
-              <Deck />
+              {!isLearningPage ? <Deck /> : ""}
             </div>
             {wordForLearning.length > 0
               ? wordForLearning.map((w) => (
@@ -69,15 +83,7 @@ const Cards = () => {
           </>
         )}
       </div>
-      {wordForLearning.length > 0 ? (
-        <Button
-          title="Go to learning"
-          onClick={toLearning}
-          className={s.button}
-        />
-      ) : (
-        ""
-      )}
+      {myWords.length > 0 ? button : ""}
     </div>
   );
 };

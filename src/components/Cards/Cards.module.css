@@ -22,6 +22,10 @@
   background-color: #e68900;
 }
 
+.button.hide {
+  display: none;
+}
+
 @media only screen and (max-width: 600px) {
   .button {
     margin: 20px 0px 0px 155px;

@@ -20,11 +20,13 @@ export const englishSlice = createSlice({
   name: "english",
   initialState,
   reducers: {
-    addWordForLearning: (state) => {
-      let wordsForLearning = state.wordsForLearning;
-      let wordForLearning = wordsForLearning.find((w) => w.word === w.word);
-      if (wordForLearning && wordForLearning.id !== wordForLearning.id) {
-        state.myWords.push(wordForLearning);
+    addWordForLearning: (state, action: PayloadAction<WordType>) => {
+      const wordToAdd = action.payload;
+      const isWordUnique = !state.myWords.some(
+        (word) => word.id === wordToAdd.id
+      );
+      if (isWordUnique) {
+        state.myWords.push(wordToAdd);
       }
     },
   },
@@ -32,7 +34,13 @@ export const englishSlice = createSlice({
     builder.addCase(
       setWordForLearning.fulfilled,
       (state, action: PayloadAction<WordType>) => {
-        state.wordsForLearning.push(action.payload);
+        const wordToAdd = action.payload;
+        const isWordUnique = !state.wordsForLearning.some(
+          (word) => word.id === wordToAdd.id
+        );
+        if (isWordUnique) {
+          state.wordsForLearning.push(wordToAdd);
+        }
       }
     );
   },

@@ -1,27 +1,34 @@
-import { useSelector } from "react-redux";
 import Button from "../../common/Button/Button";
 import s from "./Card.module.css";
-import { RootState, useAppDispatch } from "../../../store/store";
+import { useAppDispatch } from "../../../store/store";
 import { addWordForLearning } from "../../../store/features/englishSlice";
+import { useLocation } from "react-router-dom";
+import { WordType } from "../../../store/englishWords";
 
 type PropsType = {
   word: string;
   definition: string;
   id: string;
-  reverseCard: () => void;
+  reverseCard: (id: string) => void;
 };
 
 export const Card = (props: PropsType) => {
-  let myWords = useSelector((state: RootState) => state.english.myWords);
+  const location = useLocation();
+  const isLearningPage = location.pathname === "/learning";
 
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
-    props.reverseCard();
+    props.reverseCard(props.id);
   };
 
   const addWordToLearningList = () => {
-    dispatch(addWordForLearning());
+    const wordToAdd: WordType = {
+      word: props.word,
+      definition: props.definition,
+      id: props.id,
+    };
+    dispatch(addWordForLearning(wordToAdd));
   };
 
   return (
@@ -30,14 +37,30 @@ export const Card = (props: PropsType) => {
       <p className={s.definition} onClick={handleClick}>
         {props.definition}
       </p>
-      <div className={s.buttonGroup}>
-        <div>
-          <Button title="I know" className={s.knowButton} onClick={() => {}} />
+      {isLearningPage ? (
+        <div className={s.buttonGroup}>
+          <div>
+            <Button
+              title="I know"
+              className={s.knowButton}
+              onClick={() => {}}
+            />
+          </div>
         </div>
-        <div>
-          <Button title="To learn" onClick={addWordToLearningList} />
+      ) : (
+        <div className={s.buttonGroup}>
+          <div>
+            <Button
+              title="I know"
+              className={s.knowButton}
+              onClick={() => {}}
+            />
+          </div>
+          <div>
+            <Button title="To learn" onClick={addWordToLearningList} />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
