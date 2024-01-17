@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Cards from "./components/Cards/Cards.tsx";
+import LearningTable from "./components/LearningTable/LearningTable.tsx";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/learning",
-    element: <Cards />,
+    element: <LearningTable />,
   },
 ]);
 

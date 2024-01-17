@@ -39,30 +39,16 @@ const Cards = () => {
     <div>
       <Header />
       <div className={s.container}>
-        {renderChangedCode ? (
-          <>
-            {myWords.length > 0
-              ? myWords.map((w) => (
-                  <div className={s.cardWrapper} key={w.id}>
-                    <Card word={w.word} definition={w.definition} id={w.id} />
-                  </div>
-                ))
-              : ""}
-          </>
-        ) : (
-          <>
-            <div className={s.cardWrapper}>
-              {!isLearningPage ? <Deck /> : ""}
-            </div>
-            {wordForLearning.length > 0
-              ? wordForLearning.map((w) => (
-                  <div className={s.cardWrapper} key={w.id}>
-                    <Card word={w.word} definition={w.definition} id={w.id} />
-                  </div>
-                ))
-              : ""}
-          </>
-        )}
+        <div className={s.cardWrapper}>
+          <Deck />
+        </div>
+        {wordForLearning.length > 0
+          ? wordForLearning.map((w) => (
+              <div className={s.cardWrapper} key={w.id}>
+                <Card word={w.word} definition={w.definition} id={w.id} />
+              </div>
+            ))
+          : ""}
       </div>
       {myWords.length > 0 ? button : ""}
     </div>
