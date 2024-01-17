@@ -1,11 +1,16 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { WordType, englishWordsC1 } from "../englishWords";
+import { loadDataFromLocalStorage } from "../../components/common/localStorageUtils/localStorageUtils";
 
 const initialState: {
   englishWordsC1: WordType[];
   myWords: WordType[];
   wordsForLearning: WordType[];
-} = { englishWordsC1: englishWordsC1, myWords: [], wordsForLearning: [] };
+} = {
+  englishWordsC1: loadDataFromLocalStorage("englishWordsC1") || englishWordsC1,
+  myWords: loadDataFromLocalStorage("myWords") || [],
+  wordsForLearning: loadDataFromLocalStorage("wordsForLearning") || [],
+};
 
 export const setWordForLearning = createAsyncThunk(
   "english/setWordForLearning",

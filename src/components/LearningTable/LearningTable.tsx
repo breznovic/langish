@@ -20,11 +20,13 @@ const LearningTable = () => {
       <Header />
       <div className={s.container}>
         {myWords.length > 0 ? (
-          myWords.map((w) => (
-            <div className={s.cardWrapper} key={w.id}>
-              <Card word={w.word} definition={w.definition} id={w.id} />
-            </div>
-          ))
+          <>
+            {myWords.map((w) => (
+              <div className={s.cardWrapper} key={w.id}>
+                <Card word={w.word} definition={w.definition} id={w.id} />
+              </div>
+            ))}
+          </>
         ) : (
           <div className={s.container}>
             <div className={s.noCards}>Add new cards for learning</div>
@@ -36,6 +38,11 @@ const LearningTable = () => {
           </div>
         )}
       </div>
+      {myWords.length > 0 ? (
+        <Button title="Go to deck" onClick={toDeck} className={s.button} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
