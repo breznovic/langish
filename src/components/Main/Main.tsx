@@ -8,7 +8,7 @@ const Main = () => {
 
   return (
     <div className={s.container}>
-      <h1 className={s.mainTitle}>Main Page</h1>
+      <h1 className={s.mainTitle}>Welcome!</h1>
       <p>
         This application is designed for those who are learning foreign
         languages and want to expand their vocabulary.
