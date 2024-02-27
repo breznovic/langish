@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import s from "./Cards.module.css";
 import Header from "../Header/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "./Card/Card";
 import Deck from "./Deck/Deck";
 import Button from "../common/Button/Button";
@@ -26,6 +26,8 @@ const Cards = () => {
   const isLearningPage = location.pathname === "/learning";
 
   const [renderChangedCode, setRenderChangedCode] = useState(false);
+
+  useEffect(() => {}, [renderChangedCode]); // Need for deploy on Vercel
 
   const button = (
     <Button
