@@ -52,7 +52,7 @@ const Cards = () => {
             ))
           : ""}
       </div>
-      {myWords.length > 0 ? button : ""}
+      <div className={s.buttonContainer}>{myWords.length > 0 ? button : ""}</div>
     </div>
   );
 };

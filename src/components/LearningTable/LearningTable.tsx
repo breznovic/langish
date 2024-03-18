@@ -28,7 +28,7 @@ const LearningTable = () => {
             ))}
           </>
         ) : (
-          <div className={s.container}>
+          <div className={s.empty}>
             <div className={s.noCards}>Add new cards for learning</div>
             <Button
               onClick={toDeck}
