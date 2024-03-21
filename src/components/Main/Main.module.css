@@ -9,6 +9,13 @@
 .container p {
   color: rgba(240, 248, 255, 0.521);
   font-size: 25px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.container h2 {
+  color: rgba(240, 248, 255, 0.521);
+  font-size: 35px;
   margin-bottom: 60px;
   width: 100%;
 }

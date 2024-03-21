@@ -13,6 +13,7 @@ const Main = () => {
         This application is designed for those who are learning foreign
         languages and want to expand their vocabulary.
       </p>
+      <h2>Choose language</h2>
       <Button onClick={startApp} className={s.button} title="Click to start" />
     </div>
   );

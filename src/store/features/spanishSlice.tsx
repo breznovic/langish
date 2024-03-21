@@ -1,28 +1,29 @@
-/* import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { WordType, englishWordsC1 } from "../words/englishWords";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { WordType} from "../words/englishWords";
 import { loadDataFromLocalStorage } from "../../components/common/localStorageUtils/localStorageUtils";
+import { spanishWordsA1 } from "../words/spanishWords";
 
 const initialState: {
-  englishWordsC1: WordType[];
+  spanishWordsA1: WordType[];
   myWords: WordType[];
   wordsForLearning: WordType[];
 } = {
-  englishWordsC1: loadDataFromLocalStorage("englishWordsC1") || englishWordsC1,
-  myWords: loadDataFromLocalStorage("myEnglishWords") || [],
-  wordsForLearning: loadDataFromLocalStorage("englishWordsForLearning") || [],
+  spanishWordsA1: loadDataFromLocalStorage("spanishWordsA1") || spanishWordsA1,
+  myWords: loadDataFromLocalStorage("mySpanishWords") || [],
+  wordsForLearning: loadDataFromLocalStorage("spanishWordsForLearning") || [],
 };
 
 export const setWordForLearning = createAsyncThunk(
-  "english/setWordForLearning",
+  "spanish/setWordForLearning",
   async () => {
     const randomWord =
-      englishWordsC1[Math.floor(Math.random() * englishWordsC1.length)];
+    spanishWordsA1[Math.floor(Math.random() * spanishWordsA1.length)];
     return randomWord;
   }
 );
 
-export const englishSlice = createSlice({
-  name: "english",
+export const spanishSlice = createSlice({
+  name: "spanish",
   initialState,
   reducers: {
     addWordForLearning: (state, action: PayloadAction<WordType>) => {
@@ -41,7 +42,7 @@ export const englishSlice = createSlice({
     deleteWord: (state, action: PayloadAction<string>) => {
       const wordIdToDelete = action.payload;
 
-      state.englishWordsC1 = state.englishWordsC1.filter(
+      state.spanishWordsA1 = state.spanishWordsA1.filter(
         (word) => word.id !== wordIdToDelete
       );
 
@@ -70,7 +71,6 @@ export const englishSlice = createSlice({
   },
 });
 
-export const { addWordForLearning, deleteWord } = englishSlice.actions;
+export const { addWordForLearning, deleteWord } = spanishSlice.actions;
 
-export default englishSlice.reducer;
- */
+export default spanishSlice.reducer;

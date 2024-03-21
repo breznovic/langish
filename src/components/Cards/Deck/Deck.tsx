@@ -1,14 +1,19 @@
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../../store/store";
-import { setWordForLearning } from "../../../store/features/englishSlice";
+/* import { setWordForLearning } from "../../../store/features/englishSlice"; */
+import { setWordForLearning } from "../../../store/features/spanishSlice";
 import Button from "../../common/Button/Button";
 import s from "./Deck.module.css";
 import logo from "../../../assets/icon.png";
 import { useState } from "react";
 
 const Deck = () => {
-  const wordForLearning = useSelector(
+ /*  const wordForLearning = useSelector(
     (state: RootState) => state.english.wordsForLearning
+  ); */
+
+  const wordForLearning = useSelector(
+    (state: RootState) => state.spanish.wordsForLearning
   );
 
   const dispatch = useAppDispatch();

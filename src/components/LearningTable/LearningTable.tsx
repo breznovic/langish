@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { Card } from "../Cards/Card/Card";
 
 const LearningTable = () => {
-  let myWords = useSelector((state: RootState) => state.english.myWords);
+  /* let myWords = useSelector((state: RootState) => state.english.myWords); */
+  let myWords = useSelector((state: RootState) => state.spanish.myWords);
 
   const navigate = useNavigate();
 

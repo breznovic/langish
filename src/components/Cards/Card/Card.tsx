@@ -1,12 +1,16 @@
 import Button from "../../common/Button/Button";
 import s from "./Card.module.css";
 import { useAppDispatch } from "../../../store/store";
+/* import {
+  addWordForLearning,
+  deleteWord,
+} from "../../../store/features/englishSlice"; */
 import {
   addWordForLearning,
   deleteWord,
-} from "../../../store/features/englishSlice";
+} from "../../../store/features/spanishSlice";
 import { useLocation } from "react-router-dom";
-import { WordType } from "../../../store/englishWords";
+import { WordType } from "../../../store/words/englishWords";
 import { useState } from "react";
 
 type PropsType = {

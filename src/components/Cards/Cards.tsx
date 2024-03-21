@@ -9,11 +9,17 @@ import Button from "../common/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Cards = () => {
-  let wordForLearning = useSelector(
+  /* let wordForLearning = useSelector(
     (state: RootState) => state.english.wordsForLearning
   );
 
-  let myWords = useSelector((state: RootState) => state.english.myWords);
+  let myWords = useSelector((state: RootState) => state.english.myWords); */
+
+  let wordForLearning = useSelector(
+    (state: RootState) => state.spanish.wordsForLearning
+  );
+
+  let myWords = useSelector((state: RootState) => state.spanish.myWords);
 
   const navigate = useNavigate();
 
