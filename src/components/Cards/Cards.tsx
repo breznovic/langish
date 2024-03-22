@@ -5,7 +5,6 @@ import Header from "../Header/Header";
 import { useEffect, useState } from "react";
 import { Card } from "./Card/Card";
 import Deck from "./Deck/Deck";
-import Button from "../common/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Cards = () => {
