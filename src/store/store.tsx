@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
-/* import englishReducer from "./features/englishSlice"; */
+import englishReducer from "./features/englishSlice";
 import spanishReducer from "./features/spanishSlice";
 import { WordType } from "./words/englishWords";
 
 export const store = configureStore({
   reducer: {
-   /*  english: englishReducer, */
+    english: englishReducer,
     spanish: spanishReducer,
   },
 });
@@ -22,14 +22,14 @@ const saveDataToLocalStorage = (key: string, data: WordType[]) => {
 
 store.subscribe(() => {
   const state = store.getState();
-  /* saveDataToLocalStorage("englishWordsC1", state.english.englishWordsC1); */
+  saveDataToLocalStorage("englishWordsC1", state.english.englishWordsC1);
   saveDataToLocalStorage("spanishWordsA1", state.spanish.spanishWordsA1);
-/*   saveDataToLocalStorage("myEnglishWords", state.english.myWords); */
+  saveDataToLocalStorage("myEnglishWords", state.english.myWords);
   saveDataToLocalStorage("mySpanishWords", state.spanish.myWords);
-/*   saveDataToLocalStorage(
+  saveDataToLocalStorage(
     "englishWordsForLearning",
     state.english.wordsForLearning
-  ); */
+  );
   saveDataToLocalStorage(
     "spanishWordsForLearning",
     state.spanish.wordsForLearning

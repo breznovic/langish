@@ -9,17 +9,27 @@ import Button from "../common/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Cards = () => {
-  /* let wordForLearning = useSelector(
+  let englishWordForLearning = useSelector(
     (state: RootState) => state.english.wordsForLearning
   );
 
-  let myWords = useSelector((state: RootState) => state.english.myWords); */
-
-  let wordForLearning = useSelector(
+  let spanishWordForLearning = useSelector(
     (state: RootState) => state.spanish.wordsForLearning
   );
 
-  let myWords = useSelector((state: RootState) => state.spanish.myWords);
+  const isEnglishActive = useSelector(
+    (state: RootState) => state.english.isActive
+  );
+
+  let myEnglishWords = useSelector((state: RootState) => state.english.myWords);
+
+  let mySpanishWords = useSelector((state: RootState) => state.spanish.myWords);
+
+  let wordForLearning = isEnglishActive
+    ? englishWordForLearning
+    : spanishWordForLearning;
+
+  let myWords = isEnglishActive ? myEnglishWords : mySpanishWords;
 
   const navigate = useNavigate();
 
@@ -36,11 +46,12 @@ const Cards = () => {
   useEffect(() => {}, [renderChangedCode]); // Need for deploy on Vercel
 
   const button = (
-    <Button
-      title="Go to learning"
+    <button
       onClick={toLearning}
       className={isLearningPage ? `${s.button} ${s.hide}` : s.button}
-    />
+    >
+      Go to learning
+    </button>
   );
 
   return (
@@ -48,7 +59,7 @@ const Cards = () => {
       <Header />
       <div className={s.container}>
         <div className={s.cardWrapper}>
-          <Deck />
+          <Deck wordForLearning={wordForLearning} />
         </div>
         {wordForLearning.length > 0
           ? wordForLearning.map((w) => (
@@ -58,7 +69,9 @@ const Cards = () => {
             ))
           : ""}
       </div>
-      <div className={s.buttonContainer}>{myWords.length > 0 ? button : ""}</div>
+      <div className={s.buttonContainer}>
+        {myWords.length > 0 ? button : ""}
+      </div>
     </div>
   );
 };

@@ -1,10 +1,26 @@
 import { useNavigate } from "react-router-dom";
 import s from "./Main.module.css";
-import Button from "../../components/common/Button/Button";
+import brFlag from "../../assets/brFlag.png";
+import spFlag from "../../assets/spainFlag.png";
+import { useAppDispatch } from "../../store/store";
+import { learnEnglish, stopEnglish } from "../../store/features/englishSlice";
+import { learnSpanish, stopSpanish } from "../../store/features/spanishSlice";
 
 const Main = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const startApp = () => navigate("/cards");
+
+  const startEnglishApp = () => {
+    dispatch(stopSpanish());
+    dispatch(learnEnglish());
+    navigate("/cards");
+  };
+
+  const startSpanishApp = () => {
+    dispatch(stopEnglish());
+    dispatch(learnSpanish());
+    navigate("/cards");
+  };
 
   return (
     <div className={s.container}>
@@ -14,7 +30,10 @@ const Main = () => {
         languages and want to expand their vocabulary.
       </p>
       <h2>Choose language</h2>
-      <Button onClick={startApp} className={s.button} title="Click to start" />
+      <div className={s.flags}>
+        <img src={brFlag} className={s.flag} onClick={startEnglishApp} />
+        <img src={spFlag} className={s.flag} onClick={startSpanishApp} />
+      </div>
     </div>
   );
 };

@@ -1,17 +1,18 @@
 import Button from "../../common/Button/Button";
 import s from "./Card.module.css";
-import { useAppDispatch } from "../../../store/store";
-/* import {
-  addWordForLearning,
-  deleteWord,
-} from "../../../store/features/englishSlice"; */
+import { RootState, useAppDispatch } from "../../../store/store";
 import {
-  addWordForLearning,
-  deleteWord,
+  addEnglishWordForLearning,
+  deleteEnglishWord,
+} from "../../../store/features/englishSlice";
+import {
+  addSpanishWordForLearning,
+  deleteSpanishWord,
 } from "../../../store/features/spanishSlice";
 import { useLocation } from "react-router-dom";
 import { WordType } from "../../../store/words/englishWords";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 type PropsType = {
   word: string;
@@ -20,6 +21,10 @@ type PropsType = {
 };
 
 export const Card = (props: PropsType) => {
+  const isEnglishActive = useSelector(
+    (state: RootState) => state.english.isActive
+  );
+
   const location = useLocation();
   const isLearningPage = location.pathname === "/learning";
 
@@ -37,11 +42,15 @@ export const Card = (props: PropsType) => {
       definition: props.definition,
       id: props.id,
     };
-    dispatch(addWordForLearning(wordToAdd));
+    isEnglishActive
+      ? dispatch(addEnglishWordForLearning(wordToAdd))
+      : dispatch(addSpanishWordForLearning(wordToAdd));
   };
 
   const deleteKnownWord = () => {
-    dispatch(deleteWord(props.id));
+    isEnglishActive
+      ? dispatch(deleteEnglishWord(props.id))
+      : dispatch(deleteSpanishWord(props.id));
   };
 
   return (

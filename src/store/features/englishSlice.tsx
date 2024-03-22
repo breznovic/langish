@@ -1,4 +1,4 @@
-/* import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { WordType, englishWordsC1 } from "../words/englishWords";
 import { loadDataFromLocalStorage } from "../../components/common/localStorageUtils/localStorageUtils";
 
@@ -6,13 +6,15 @@ const initialState: {
   englishWordsC1: WordType[];
   myWords: WordType[];
   wordsForLearning: WordType[];
+  isActive: boolean;
 } = {
   englishWordsC1: loadDataFromLocalStorage("englishWordsC1") || englishWordsC1,
   myWords: loadDataFromLocalStorage("myEnglishWords") || [],
   wordsForLearning: loadDataFromLocalStorage("englishWordsForLearning") || [],
+  isActive: false,
 };
 
-export const setWordForLearning = createAsyncThunk(
+export const setEnglishWordForLearning = createAsyncThunk(
   "english/setWordForLearning",
   async () => {
     const randomWord =
@@ -25,7 +27,7 @@ export const englishSlice = createSlice({
   name: "english",
   initialState,
   reducers: {
-    addWordForLearning: (state, action: PayloadAction<WordType>) => {
+    addEnglishWordForLearning: (state, action: PayloadAction<WordType>) => {
       const wordToAdd = action.payload;
       const isWordUnique = !state.myWords.some(
         (word) => word.id === wordToAdd.id
@@ -38,7 +40,7 @@ export const englishSlice = createSlice({
       );
       state.wordsForLearning = arrayWithDeletedWord;
     },
-    deleteWord: (state, action: PayloadAction<string>) => {
+    deleteEnglishWord: (state, action: PayloadAction<string>) => {
       const wordIdToDelete = action.payload;
 
       state.englishWordsC1 = state.englishWordsC1.filter(
@@ -53,16 +55,25 @@ export const englishSlice = createSlice({
         (word) => word.id !== wordIdToDelete
       );
     },
+    learnEnglish: (state) => {
+      state.isActive = true;
+    },
+    stopEnglish: (state) => {
+      state.isActive = false;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
-      setWordForLearning.fulfilled,
+      setEnglishWordForLearning.fulfilled,
       (state, action: PayloadAction<WordType>) => {
         const wordToAdd = action.payload;
         const isWordUnique = !state.wordsForLearning.some(
           (word) => word.id === wordToAdd.id
         );
-        if (isWordUnique) {
+        const isWordAlreadyAdded = state.myWords.some(
+          (word) => word.id === wordToAdd.id
+        );
+        if (isWordUnique && !isWordAlreadyAdded) {
           state.wordsForLearning.push(wordToAdd);
         }
       }
@@ -70,7 +81,11 @@ export const englishSlice = createSlice({
   },
 });
 
-export const { addWordForLearning, deleteWord } = englishSlice.actions;
+export const {
+  addEnglishWordForLearning,
+  deleteEnglishWord,
+  learnEnglish,
+  stopEnglish,
+} = englishSlice.actions;
 
 export default englishSlice.reducer;
- */

@@ -1,19 +1,20 @@
 import { useSelector } from "react-redux";
 import { RootState, useAppDispatch } from "../../../store/store";
-/* import { setWordForLearning } from "../../../store/features/englishSlice"; */
-import { setWordForLearning } from "../../../store/features/spanishSlice";
+import { setEnglishWordForLearning } from "../../../store/features/englishSlice";
+import { setSpanishWordForLearning } from "../../../store/features/spanishSlice";
 import Button from "../../common/Button/Button";
 import s from "./Deck.module.css";
 import logo from "../../../assets/icon.png";
 import { useState } from "react";
+import { WordType } from "../../../store/words/englishWords";
 
-const Deck = () => {
- /*  const wordForLearning = useSelector(
-    (state: RootState) => state.english.wordsForLearning
-  ); */
+type Props = {
+  wordForLearning: WordType[];
+};
 
-  const wordForLearning = useSelector(
-    (state: RootState) => state.spanish.wordsForLearning
+const Deck = (props: Props) => {
+  const isEnglishActive = useSelector(
+    (state: RootState) => state.english.isActive
   );
 
   const dispatch = useAppDispatch();
@@ -22,10 +23,12 @@ const Deck = () => {
   const modalClose = () => setShowModal(false);
 
   const addNewWord = () => {
-    if (wordForLearning.length > 6) {
+    if (props.wordForLearning.length > 6) {
       setShowModal(true);
     } else {
-      dispatch(setWordForLearning());
+      isEnglishActive
+        ? dispatch(setEnglishWordForLearning())
+        : dispatch(setSpanishWordForLearning());
     }
   };
 
