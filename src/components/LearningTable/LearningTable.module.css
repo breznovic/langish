@@ -11,21 +11,28 @@
   justify-content: center;
   align-items: center;
   text-wrap: nowrap;
+  padding-left: 25px;
 }
 
 .cardWrapper {
   margin-left: 10px;
 }
 
-.button {
-  background-color: #ffa500;
-  padding: 30px 40px;
-  margin: 20px 0px 20px 850px;
-  text-wrap: nowrap;
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.toDeckButton {
-  margin: 20px 0px 20px 50px;
+.button {
+  background-color: #ffa500;
+  border: none;
+  border-radius: 4px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 30px 40px;
+  text-wrap: nowrap;
 }
 
 .button:hover {
@@ -48,26 +55,16 @@
 }
 
 @media only screen and (max-width: 375px) {
-  .empty {
-    margin: 200px 0px 0px 0px;
-    width: 75%;
+  .buttonContainer {
+    margin: 0px 60px 0px 0px !important;
   }
-
   .container {
     justify-content: center;
     width: 75%;
   }
 
-  .button {
-    margin: 20px 0px 20px 30px;
-  }
-
-  .empty .button {
-    margin: 20px 0px 20px 30px;
-  }
-
   .noCards {
-    margin-left: 30px;
+    font-size: 28px;
   }
 }
 
@@ -83,7 +80,7 @@
   }
 
   .button {
-    margin: 20px 0px 20px 90px;
+    margin: 10px 0px 0px 20px;
   }
 
   .empty .button {
@@ -99,6 +96,9 @@
   .noCards {
     font-size: 29px;
   }
+  .buttonContainer {
+    margin: 10px 0px 20px 0px !important;
+  }
 }
 
 @media only screen and (max-width: 575.98px) {
@@ -112,8 +112,8 @@
     width: 85%;
   }
 
-  .button {
-    margin: 20px 0px 20px 160px;
+  .buttonContainer {
+    margin: 20px 0px 80px 10px;
   }
 
   .empty .button {
@@ -126,8 +126,8 @@
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767.98px) {
-  .button {
-    margin: 20px 0px 20px 190px;
+  .buttonContainer {
+    margin: 20px 70px 10px 0px;
   }
 
   .empty {
@@ -140,8 +140,8 @@
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991.98px) {
-  .button {
-    margin: 20px 0px 20px 390px;
+  .buttonContainer {
+    margin: 20px 70px 10px 0px;
   }
   .empty {
     margin: 200px 0px 0px 50px;
@@ -153,8 +153,8 @@
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199.98px) {
-  .button {
-    margin: 20px 0px 20px 500px;
+  .buttonContainer {
+    margin: 20px 70px 10px 0px;
   }
   .empty {
     margin: 200px 0px 0px 70px;
@@ -166,14 +166,14 @@
 }
 
 @media only screen and (min-width: 1200px) {
-  .button {
-    margin: 20px 0px 20px 790px;
-  }
   .empty {
     margin: 200px 0px 0px 100px;
     width: 85%;
   }
   .empty .button {
     margin: 20px 0px 20px 70px;
+  }
+  .buttonContainer {
+    margin: 20px 70px 0px 0px;
   }
 }

@@ -55,19 +55,32 @@
 }
 
 @media only screen and (max-width: 375px) {
+  .mainTitle {
+    margin: 70px 0px 0px 0px;
+  }
+
   p {
-    width: 95%;
+    width: 94% !important;
+    text-align: justify;
   }
 }
 
 @media only screen and (max-width: 390px) {
+  .mainTitle {
+    margin: 70px 0px 0px 0px;
+  }
   p {
-    width: 95%;
+    width: 95% !important;
   }
 }
 
 @media only screen and (max-width: 575.98px) {
+  .mainTitle {
+    margin: 70px 0px 0px 0px;
+  }
   p {
     width: 95%;
+    max-width: 400px;
+    text-align: justify;
   }
 }

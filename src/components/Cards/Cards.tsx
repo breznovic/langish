@@ -5,7 +5,7 @@ import Header from "../Header/Header";
 import { useEffect, useState } from "react";
 import { Card } from "./Card/Card";
 import Deck from "./Deck/Deck";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Cards = () => {
   let englishWordForLearning = useSelector(
@@ -37,24 +37,12 @@ const Cards = () => {
     navigate("/learning");
   };
 
-  const location = useLocation();
-  const isLearningPage = location.pathname === "/learning";
-
   const [renderChangedCode, setRenderChangedCode] = useState(false);
 
   useEffect(() => {}, [renderChangedCode]); // Need for deploy on Vercel
 
-  const button = (
-    <button
-      onClick={toLearning}
-      className={isLearningPage ? `${s.button} ${s.hide}` : s.button}
-    >
-      Go to learning
-    </button>
-  );
-
   return (
-    <div>
+    <>
       <Header />
       <div className={s.container}>
         <div className={s.cardWrapper}>
@@ -69,9 +57,15 @@ const Cards = () => {
           : ""}
       </div>
       <div className={s.buttonContainer}>
-        {myWords.length > 0 ? button : ""}
+        {myWords.length > 0 ? (
+          <button onClick={toLearning} className={s.button}>
+            Go to learning
+          </button>
+        ) : (
+          ""
+        )}
       </div>
-    </div>
+    </>
   );
 };
 
