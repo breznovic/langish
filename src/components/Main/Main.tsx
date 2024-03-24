@@ -3,21 +3,19 @@ import s from "./Main.module.css";
 import brFlag from "../../assets/brFlag.png";
 import spFlag from "../../assets/spainFlag.png";
 import { useAppDispatch } from "../../store/store";
-import { learnEnglish, stopEnglish } from "../../store/features/englishSlice";
-import { learnSpanish, stopSpanish } from "../../store/features/spanishSlice";
+import { learnEnglish } from "../../store/features/englishSlice";
+import { learnSpanish } from "../../store/features/spanishSlice";
 
 const Main = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const startEnglishApp = () => {
-    dispatch(stopSpanish());
     dispatch(learnEnglish());
     navigate("/cards");
   };
 
   const startSpanishApp = () => {
-    dispatch(stopEnglish());
     dispatch(learnSpanish());
     navigate("/cards");
   };
